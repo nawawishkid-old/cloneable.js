@@ -2,14 +2,18 @@
   "name": "cloneable-element",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "src/Cloneable.js",
   "scripts": {
-    "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "try": "parcel -d try-dist try/index.html --open",
+    "build": "parcel build -o cloneable.min.js src/build.js && parcel build -o cloneable.js --no-minify src/build.js",
+    "test": "jest tests/*"
   },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "7.2.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
     "parcel-bundler": "^1.6.1"
   },
   "keywords": []

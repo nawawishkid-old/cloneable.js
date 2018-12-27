@@ -1,6 +1,6 @@
 import Cloneable from "../src/Cloneable";
 import EventEmitter from "../src/EventEmitter";
-import OptionController from "../src/OptionController";
+// import OptionController from "../src/OptionController";
 
 const getCloneable = (options = {}) => new Cloneable(getContainer(), options);
 
@@ -70,14 +70,14 @@ describe("Cloneable", () => {
       );
     });
 
-    test.skip("Should assigns first parameter to this.container", () => {
+    test("Should assigns first parameter to this.container", () => {
       const elem = getContainer();
       const cloneable = new Cloneable(elem);
 
       expect(cloneable.container).toEqual(elem);
     });
 
-    test.skip("Should assigns EventEmitter instance to this.eventEmitter", () => {
+    test("Should assigns EventEmitter instance to this.eventEmitter", () => {
       const cloneable = new Cloneable(getContainer());
 
       expect(cloneable.eventEmitter.constructor).toEqual(EventEmitter);

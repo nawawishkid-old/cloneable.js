@@ -5,11 +5,15 @@ import OptionController from "./OptionController";
 /**
  * @typedef {object} CloneableEvents
  *
- * @prop {array} load - Array of listeners for 'load' event.
- * @prop {array} afterStateChange - Array of listeners for 'afterStateChange' event.
+ * @prop {function[]} load - Array of listeners for 'load' event.
+ * @prop {function[]} beforeStateChange - Array of listeners for 'beforeStateChange' event.
+ * @prop {function[]} afterStateChange - Array of listeners for 'afterStateChange' event.
+ * @prop {function[]} cloneButtonClick - Array of listeners for 'cloneButtonClick' event.
+ * @prop {function[]} removeButtonClick - Array of listeners for 'removeButtonClick' event.
+ * @prop {function[]} uncloneable - Array of listeners for 'uncloneable' event.
  */
 /**
- * @typedef {object} CloneableOption
+ * @typedef {object} CloneableOptions
  *
  * @property {number} maxCloneable - Maximum number of cloned elements allowed.
  * @property {bool} isAppend - Whether to append the cloned element or prepend it.
@@ -22,7 +26,7 @@ import OptionController from "./OptionController";
 class Cloneable {
   /**
    * @param {HTMLElement} container Container element.
-   * @param {CloneableOption} option Cloneable's option.
+   * @param {CloneableOptions} option Cloneable's option.
    */
   constructor(container, options = {}) {
     if (typeof container === "undefined") {
@@ -184,6 +188,8 @@ class Cloneable {
    */
   clone() {
     if (!this.isCloneable()) {
+      this.eventEmitter.emit("uncloneable", this);
+
       return;
     }
 
@@ -192,13 +198,17 @@ class Cloneable {
     const clonedElemWrapper = this._createClonedElementWrapper();
     const cloned = this.target.cloneNode(true);
     const removeButton = this._getRemoveButton();
-    const insertMethod = this._getState().isAppend ? "beforeend" : "afterbegin";
+    const insertMethod = this._getState().isAppend
+      ? "appendChild"
+      : "insertBefore";
 
     // Append cloned element before apply middleware
     // so the middleware can access clonedElemWrapper via clonedElem.parentElement
     clonedElemWrapper.appendChild(cloned);
     clonedElemWrapper.appendChild(removeButton);
-    this.tray.insertAdjacentElement(insertMethod, clonedElemWrapper);
+    // Could not use Node.insertAdjacentElement.
+    // Not-a-function error is thrown.
+    this.tray[insertMethod](clonedElemWrapper, this.tray.firstElementChild);
 
     const alteredCloned = this._applyMiddlewares(cloned);
     const { clonedAmount, cloneableAmount, clonedElements } = this._getState();
@@ -250,7 +260,10 @@ class Cloneable {
           textContent: "Clone"
         });
 
-    btn.addEventListener("click", this.clone.bind(this));
+    btn.addEventListener("click", () => {
+      this.eventEmitter.emit("cloneButtonClick", this);
+      this.clone();
+    });
 
     return btn;
   }
@@ -273,9 +286,10 @@ class Cloneable {
     // btn.style.top = "5px";
     // btn.style.right = "5px";
 
-    btn.addEventListener("click", e =>
-      this.removeClonedElement(e.target.parentElement.dataset.clonedId)
-    );
+    btn.addEventListener("click", e => {
+      this.eventEmitter.emit("removeButtonClick", this);
+      this.removeClonedElement(e.target.parentElement.dataset.clonedId);
+    });
 
     return btn;
   }

@@ -1,3 +1,3 @@
 import Cloneable from "./Cloneable";
 
-export default Cloneable;
+window.Cloneable = Cloneable;
