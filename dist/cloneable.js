@@ -365,6 +365,10 @@ function () {
       throw new Error("Cloneable container must be defined");
     }
 
+    if (container === null) {
+      throw new Error("Cloneable container must not be null");
+    }
+
     var type = container.constructor.name.slice(0, 3);
 
     if (type !== "SVG" && type !== "HTM") {
@@ -525,7 +529,7 @@ function () {
   }, {
     key: "_initContainerElement",
     value: function _initContainerElement() {
-      this.container.style.padding = "1em";
+      // this.container.style.padding = "1em";
       this.target = this.container.firstElementChild; // Add to document
 
       this.tray.appendChild(this.target);
