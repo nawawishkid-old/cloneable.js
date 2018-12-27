@@ -1,0 +1,8 @@
+body {
+  font-family: sans-serif;
+}
+
+.section {
+  padding: 1em;
+  border-bottom: 3px solid gray;
+}

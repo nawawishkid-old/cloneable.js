@@ -1,2 +1,1 @@
-# cloneable.js
-Created with CodeSandbox
+# Cloneable Element

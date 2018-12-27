@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Cloneable Element
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css")
+  body.is-invisible
+    p Custom style cloneable
+    //- The '.cloneable' classname is not required.
+    //- It's just a generic selector.
+    .cloneable(data-max="5" data-append="false")
+      //- The first child of cloneable container will be cloned.
+      .field
+        label.label Clone me!
+        .control
+          input.input(type = "text" placeholder = "example!!")
+
+      //- Two buttons below is custom clone/remove button
+      //- Try comment them out to see the default clone/remove button
+      button.button(data-cloneable-clone-btn="") Clone naja
+      button.button.is-danger(data-cloneable-remove-btn="") Remove naja
+
+    hr
+
+    p Default style cloneable
+    .cloneable.is-invisible
+      p Hello
+
+    script(src="src/index.js")
