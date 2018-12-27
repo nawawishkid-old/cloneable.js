@@ -36,11 +36,18 @@ const getCustomButton = () => {
 
 describe("Cloneable", () => {
   describe("Instantiation", () => {
-    test("Should throws Error if first parameter is not given", () => {
+    test("Should throws Error if first parameter is undefined", () => {
       const instantiate = () => new Cloneable();
 
       expect(instantiate).toThrow(Error);
       expect(instantiate).toThrow("Cloneable container must be defined");
+    });
+
+    test("Should throws Error if first parameter is null", () => {
+      const instantiate = () => new Cloneable(null);
+
+      expect(instantiate).toThrow(Error);
+      expect(instantiate).toThrow("Cloneable container must not be null");
     });
 
     test("Should throws TypeError if first parameter is not HTML or SVG element", () => {
