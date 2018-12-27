@@ -1,7 +1,7 @@
 {
-  "name": "cloneable-element",
+  "name": "@nawawishkid/cloneable",
   "version": "1.0.0",
-  "description": "",
+  "description": "Make specific HTMLElement cloneable.",
   "main": "src/Cloneable.js",
   "scripts": {
     "try": "parcel -d try-dist try/index.html --open",
@@ -16,5 +16,18 @@
     "jest": "^23.6.0",
     "parcel-bundler": "^1.6.1"
   },
-  "keywords": []
+  "keywords": [],
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nawawishkid/cloneable.js.git"
+  },
+  "author": "Nawawish Samerpark",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nawawishkid/cloneable.js/issues"
+  },
+  "homepage": "https://github.com/nawawishkid/cloneable.js#readme"
 }

@@ -11,14 +11,20 @@ Make specific HTMLElement cloneable.
 ## NPM
 
 ```shell
-npm i @nawawishkid/cloneable.js
+npm i @nawawishkid/cloneable
 ```
 
 ## Remote URL
 
 ```html
-<script src="https://cdnjs.com/"></script>
+<script src="https://cdn.jsdelivr.net/gh/nawawishkid/cloneable.js@1.0.0/dist/cloneable.min.js"></script>
 ```
+
+# NPM Scripts
+
+- `build` -- Build (bundle) this library.
+- `try` -- Serve example usage website locally using Parcel.js.
+- `test` -- Run test suite.
 
 # Quick start
 
