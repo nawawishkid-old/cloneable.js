@@ -1,6 +1,6 @@
 {
   "name": "@nawawishkid/cloneable",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Make specific HTMLElement cloneable.",
   "main": "src/Cloneable.js",
   "scripts": {
