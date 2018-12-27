@@ -178,7 +178,7 @@ class Cloneable {
    * Initialize Cloneable's container element.
    */
   _initContainerElement() {
-    this.container.style.padding = "1em";
+    // this.container.style.padding = "1em";
     this.target = this.container.firstElementChild;
 
     // Add to document
