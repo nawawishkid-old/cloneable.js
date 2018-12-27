@@ -16,8 +16,8 @@ npm i @nawawishkid/cloneable
 
 ## Remote URL
 
-On npm: [https://cdn.jsdelivr.net/npm/@nawawishkid/cloneable@1.0.1/dist/cloneable.min.js](https://cdn.jsdelivr.net/npm/@nawawishkid/cloneable@1.0.1/dist/cloneable.min.js)  
-On GitHub: [https://cdn.jsdelivr.net/gh/nawawishkid/cloneable.js@1.0.1/dist/cloneable.min.js](https://cdn.jsdelivr.net/gh/nawawishkid/cloneable.js@1.0.1/dist/cloneable.min.js)
+On npm: [https://cdn.jsdelivr.net/npm/@nawawishkid/cloneable@latest/dist/cloneable.min.js](https://cdn.jsdelivr.net/npm/@nawawishkid/cloneable@latest/dist/cloneable.min.js)  
+On GitHub: [https://cdn.jsdelivr.net/gh/nawawishkid/cloneable.js@latest/dist/cloneable.min.js](https://cdn.jsdelivr.net/gh/nawawishkid/cloneable.js@latest/dist/cloneable.min.js)
 
 # NPM Scripts
 
