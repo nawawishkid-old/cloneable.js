@@ -33,6 +33,10 @@ class Cloneable {
       throw new Error("Cloneable container must be defined");
     }
 
+    if (container === null) {
+      throw new Error("Cloneable container must not be null");
+    }
+
     const type = container.constructor.name.slice(0, 3);
 
     if (type !== "SVG" && type !== "HTM") {
