@@ -67,6 +67,14 @@ class Cloneable {
     );
   }
 
+  get options() {
+    return this.optionController.options;
+  }
+
+  get events() {
+    return this.eventEmitter.events;
+  }
+
   /**
    * Middleware function to manipulate the cloned element before add to document.
    *
@@ -169,8 +177,6 @@ class Cloneable {
       className: this._getConstant("TRAY_ELEMENT_CLASSNAME")
     });
 
-    tray.style.marginBottom = "1em";
-
     this.tray = tray;
   }
 
@@ -178,7 +184,6 @@ class Cloneable {
    * Initialize Cloneable's container element.
    */
   _initContainerElement() {
-    // this.container.style.padding = "1em";
     this.target = this.container.firstElementChild;
 
     // Add to document
@@ -196,8 +201,6 @@ class Cloneable {
 
       return;
     }
-
-    this.eventEmitter.emit("beforeClone", this);
 
     const clonedElemWrapper = this._createClonedElementWrapper();
     const cloned = this.target.cloneNode(true);
@@ -222,8 +225,6 @@ class Cloneable {
       cloneableAmount: cloneableAmount - 1,
       clonedElements: [...clonedElements, alteredCloned]
     });
-
-    this.eventEmitter.emit("afterClone", this);
 
     return this;
   }
@@ -265,7 +266,6 @@ class Cloneable {
         });
 
     btn.addEventListener("click", () => {
-      this.eventEmitter.emit("cloneButtonClick", this);
       this.clone();
     });
 
@@ -286,12 +286,7 @@ class Cloneable {
           textContent: "Remove"
         });
 
-    // btn.style.position = "absolute";
-    // btn.style.top = "5px";
-    // btn.style.right = "5px";
-
     btn.addEventListener("click", e => {
-      this.eventEmitter.emit("removeButtonClick", this);
       this.removeClonedElement(e.target.parentElement.dataset.clonedId);
     });
 
@@ -357,7 +352,6 @@ class Cloneable {
     );
 
     clonedElemWrapper.dataset.clonedId = this._getState().clonedAmount + 1;
-    // clonedElemWrapper.style.position = "relative";
 
     return clonedElemWrapper;
   }
