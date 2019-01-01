@@ -1,10 +1,15 @@
 # Cloneable.js
 
-Make specific HTMLElement cloneable.
+Make specific HTMLElement cloneable via user interface e.g. `<button>` element, or clone programmatically via JavaScript API.
 
 # TODO:
 
-- [ ] event listener registration test
+# Improvements:
+
+- [ ] Change option name from `maxCloneable` to just `max`
+- [ ] Remove button disability mechanism. If one prefers to disable button when number of cloned elements reach its maximum number allowed, use `uncloneable` event to disable it manually.
+- [ ] Try changing from using `class` to `function` to decrease bundle size.
+- [ ] Allow user to set default classname of the created elements e.g. `.tray`, `.controllers`, `.clone-btn`, or `.remove-btn`.
 
 # Installation
 
@@ -14,7 +19,7 @@ Make specific HTMLElement cloneable.
 npm i @nawawishkid/cloneable
 ```
 
-## Remote URL
+## CDN
 
 On npm: [https://cdn.jsdelivr.net/npm/@nawawishkid/cloneable@latest/dist/cloneable.min.js](https://cdn.jsdelivr.net/npm/@nawawishkid/cloneable@latest/dist/cloneable.min.js)  
 On GitHub: [https://cdn.jsdelivr.net/gh/nawawishkid/cloneable.js@latest/dist/cloneable.min.js](https://cdn.jsdelivr.net/gh/nawawishkid/cloneable.js@latest/dist/cloneable.min.js)
@@ -22,7 +27,6 @@ On GitHub: [https://cdn.jsdelivr.net/gh/nawawishkid/cloneable.js@latest/dist/clo
 # NPM Scripts
 
 - `build` -- Build (bundle) this library.
-- `try` -- Serve example usage website locally using Parcel.js.
 - `test` -- Run test suite.
 
 # Quick start
@@ -75,7 +79,9 @@ Object of events that `Cloneable` accepts.
 | name                | type         | default          | isRequired | explanation                                                                 |
 | ------------------- | ------------ | ---------------- | ---------- | --------------------------------------------------------------------------- |
 | `load`              | `function[]` | `[]` Empty array | `false`    | Array of event listeners (callback function) for `load` event               |
-| `beforeStateChange` | `function[]` | `[]` Empty array | `false`    | Array of event listernes (callback functions) for `beforeStateChange` event |
+| `beforeStateChange` | `function[]` | `[]` Empty array | `false`    | Array of event listeners (callback functions) for `beforeStateChange` event |
+| `afterStateChange`  | `function[]` | `[]` Empty array | `false`    | Array of event listeners (callback functions) for `afterStateChange` event  |
+| `uncloneable`       | `function[]` | `[]` Empty array | `false`    | Array of event listeners (callback functions) for `uncloneable` event       |
 
 ### `CloneableOptions`
 
@@ -89,6 +95,8 @@ Object of options for `Cloneable` instance.
 | `removeButton` | `HTMLElement`     | `null`            | `false`    | `HTMLElement` to be cloned and then used as remove button for each cloned element |
 | `middlewares`  | `function[]`      | `[]` Empty array  | `false`    | Array of callback functions to be called with cloned element as an argument       |
 | `events`       | `CloneableEvents` | `{}` Empty object | `false`    | `CloneableEvents` object                                                          |
+
+---
 
 ## Instantiation
 
@@ -116,11 +124,27 @@ const container = document.getElementById("cloneable-container");
 const cloneable = new Cloneable(container, options);
 ```
 
+---
+
+## Properties
+
+| key           | type               | explanation                                                                               |
+| ------------- | ------------------ | ----------------------------------------------------------------------------------------- |
+| `container`   | `HTMLElement`      | Container element.                                                                        |
+| `middlewares` | `array`            | Array of registered middlewares.                                                          |
+| `cloneButton` | `HTMLElement`      | Clone button element. An element, e.g. HTMLButtonElement, for triggering element cloning. |
+| `options`     | `CloneableOptions` | `CloneableOptions` object of current `Cloneable` instance.                                |
+| `events`      | `CloneableEvents`  | `CloneableEvents` object of current `Cloneable` instance.                                 |
+
+---
+
 ## Methods
 
 ### `Cloneable.init()`
 
-Initialize manipulation of given container element. You can't clone element without calling this method first.
+Initialize manipulation of given container element.
+
+> **Note:** You can't clone element without calling this method first.
 
 This method will:
 
@@ -144,6 +168,8 @@ const cloneable = new Cloneable(container);
 cloneable.init();
 ```
 
+---
+
 ### `Cloneable.clone()`
 
 Clone the element programmatically.
@@ -153,6 +179,8 @@ Clone the element, wrap it with wrapper element, then inject them into the given
 #### Return
 
 `this`
+
+---
 
 ### `Cloneable.removeClonedElement(Number id)`
 
@@ -187,6 +215,8 @@ cloneable
 cloneable.removeClonedElement(1);
 ```
 
+---
+
 ### `Cloneable.middleware(...callbacks)`
 
 Register middleware function to be called with cloned element as an argument. Use to alter the cloned element.  
@@ -218,6 +248,8 @@ cloneable
   .init();
 ```
 
+---
+
 ### `Cloneable.on(String eventName, ...eventListener)`
 
 Add event listener to the `Cloneable` object. Similar to Node.js `EventEmitter` class.
@@ -247,6 +279,8 @@ cloneable.on("beforeStateChange", () => {
 cloneable.init();
 ```
 
+---
+
 ### `Cloneable.isCloneable()`
 
 Check if it's still cloneable.
@@ -267,3 +301,5 @@ cloneable.init();
 cloneable.clone().isCloneable(); // -> true
 cloneable.clone().isCloneable(); // -> false
 ```
+
+---
