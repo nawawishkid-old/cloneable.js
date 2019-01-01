@@ -3,6 +3,10 @@ class OptionController {
     this._data = defaultData;
   }
 
+  get options() {
+    return this._data;
+  }
+
   get(key, fallback) {
     const data = this._dotNotationResolver(key);
 
