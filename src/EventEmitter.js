@@ -1,21 +1,25 @@
 class EventEmitter {
   constructor() {
-    this.events = {};
+    this._events = {};
+  }
+
+  get events() {
+    return this._events;
   }
 
   on(eventName, ...callback) {
     if (!this.eventExists(eventName)) {
-      this.events[eventName] = [];
+      this._events[eventName] = [];
     }
 
-    this.events[eventName].push(...callback);
+    this._events[eventName].push(...callback);
 
     return this;
   }
 
   emit(eventName, context = null, ...args) {
     if (this.eventExists(eventName)) {
-      this.events[eventName].forEach(callback =>
+      this._events[eventName].forEach(callback =>
         callback.call(context, ...args)
       );
     }
@@ -24,7 +28,7 @@ class EventEmitter {
   }
 
   eventExists(eventName) {
-    return typeof this.events[eventName] !== "undefined";
+    return typeof this._events[eventName] !== "undefined";
   }
 }
 
