@@ -4,7 +4,6 @@
   "description": "Make specific HTMLElement cloneable.",
   "main": "src/Cloneable.js",
   "scripts": {
-    "try": "parcel -d try-dist try/index.html --open",
     "build": "parcel build -o cloneable.min.js src/build.js && parcel build -o cloneable.js --no-minify src/build.js",
     "test": "jest tests/*"
   },
