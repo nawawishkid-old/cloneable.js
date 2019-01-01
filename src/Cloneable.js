@@ -111,9 +111,6 @@ class Cloneable {
     // Enable/disable clone button on clonedAmount change.
     this.stateController.on("afterStateChange", () => {
       this.eventEmitter.emit("afterStateChange", this);
-
-      this.cloneButton.disabled =
-        this._getState().clonedAmount === this._getState().maxCloneable;
     });
     this.stateController.on("beforeStateChange", () => {
       this.eventEmitter.emit("beforeStateChange", this);
