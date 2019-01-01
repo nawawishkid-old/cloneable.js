@@ -7,7 +7,7 @@ Make specific HTMLElement cloneable via user interface e.g. `<button>` element, 
 # Improvements:
 
 - [ ] Change option name from `maxCloneable` to just `max`
-- [ ] Remove button disability mechanism. If one prefers to disable button when number of cloned elements reach its maximum number allowed, use `uncloneable` event to disable it manually.
+- ~~[x] Remove button disability mechanism. If one prefers to disable button when number of cloned elements reach its maximum number allowed, use `uncloneable` event to disable it manually.~~
 - [ ] Try changing from using `class` to `function` to decrease bundle size.
 - [ ] Allow user to set default classname of the created elements e.g. `.tray`, `.controllers`, `.clone-btn`, or `.remove-btn`.
 
